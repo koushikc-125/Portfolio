@@ -1,10 +1,6 @@
 package com.example.portfolio.core.designsystem.component
 
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
@@ -19,9 +15,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.core.content.PackageManagerCompat
-import com.example.portfolio.core.designsystem.icon.ApplicationIcons
 import androidx.core.net.toUri
+import com.example.portfolio.core.designsystem.icon.ApplicationIcons
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

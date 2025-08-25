@@ -46,7 +46,7 @@ fun HomeScreen(
 ) {
     val options = listOf("X", "Mail", "GitHub")
     val optionsLink =
-        listOf("x.com/koushikc125", "koushikc125@gmail.com", "github.com/koushikc-125")
+        listOf("x.com/koushikc125", "koushikc513@gmail.com", "github.com/koushikc-125")
     val horizontalPadding = 24.dp
     val bottomPadding = 28.dp
     val backgroundColor = MaterialTheme.colorScheme.surface
