@@ -17,6 +17,8 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.example.portfolio.core.designsystem.component.Container
 import com.example.portfolio.core.designsystem.component.SimpleButton
@@ -125,7 +127,7 @@ fun DetailScreenContent(componentData: ComponentData) {
 private fun DetailScreenPreview() {
     PortfolioTheme {
         DetailScreen(
-            currentComponentInfoId = 1,
+            currentComponentInfoId = 0,
             onBack = {},
         )
     }
