@@ -22,3 +22,9 @@ val Gray40 = Color(0xFF666666)
 
 val Blue500 = Color(0xFF2196F3)
 val Red500 = Color(0xFFF44336)
+
+val PathDark = Color(0xFF7886DC)
+val PathLight = Color(0xFF222752)
+
+val GradientDark = Color(0xFF1F1F3B)
+val GradientLight = Color(0xFFB4CEFF)

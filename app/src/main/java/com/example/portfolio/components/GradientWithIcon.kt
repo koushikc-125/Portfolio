@@ -1,140 +1,129 @@
 package com.example.portfolio.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.unit.dp
+import com.example.portfolio.core.designsystem.theme.GradientDark
+import com.example.portfolio.core.designsystem.theme.GradientLight
+import com.example.portfolio.core.designsystem.theme.PathDark
+import com.example.portfolio.core.designsystem.theme.PathLight
 
 @Composable
 fun GradientIcon(
     showAnimation: Boolean = false
 ) {
+
+    val getFinderColors: FinderColors =
+        if (isSystemInDarkTheme()) DarkFinderColors else LightFinderColors
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .drawWithCache {
                 onDrawBehind {
+                    val gradientCenterX = size.width / 2.2f
+                    val gradientCenterY = size.height / 2f
+                    val radius =
+                        minOf(size.width, size.height) * 0.2f // Smaller radius for the effect
+
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                getFinderColors.gradientColor.copy(alpha = 0.6f),
+                                Color.Transparent // Transparent edges
+                            ), center = Offset(gradientCenterX, gradientCenterY), radius = radius
+                        )
+                    )
+
                     val centerX = size.width / 2f
                     val centerY = size.height / 2f
-                    // Scale factor to make the path bigger and visible
-                    val scale = minOf(size.width, size.height) / 100f  // Increased from 100f to 30f
+
+                    drawContext.canvas.save()
+                    drawContext.canvas.translate(centerX, centerY)
+//M 0 -65 C -14 -52 -20 -15 -20 -5 C -20 5 -20 15 -10 15 C 5 15 5 15 5 35 L 5 35 C 5 49 5 65 13 81
                     val path = Path().apply {
-                        // M63 12 - Move to point (63, 12)
-                        moveTo(63f * scale, 12f * scale)
+//body
+                        //M 0 -65
+                        moveTo(0f, -65f)
 
-                        // V10 - Vertical line to y=10 (equivalent to lineTo(63, 10))
-                        lineTo(63f * scale, 10f * scale)
-
-                        // M54.5 12 - Move to new point (54.5, 12)
-                        moveTo(54.5f * scale, 12f * scale)
-
-                        // V10 - Vertical line to y=10 (equivalent to lineTo(54.5, 10))
-                        lineTo(54.5f * scale, 10f * scale)
-
-                        // M64 20 - Move to new point (64, 20)
-                        moveTo(64f * scale, 20f * scale)
-
-                        // C59 21 59 21 54 20 - Cubic bezier curve to (54, 20)
+                        //C -14 -52 -20 -15 -20 -5
                         cubicTo(
-                            x1 = 59f * scale, y1 = 21f * scale,
-                            x2 = 59f * scale, y2 = 21f * scale,
-                            x3 = 54f * scale, y3 = 20f * scale
+                            -14f, -52f, -20f, -15f, -20f, -5f
                         )
 
-                        // M61 24 - Move to new point (61, 24)
-                        moveTo(61f * scale, 24f * scale)
-
-                        // C60 21 60 16 60 17 60 17 60 16 59 16 - Cubic bezier curve to (59, 16)
+                        //C -20 5 -20 15 -10 15
                         cubicTo(
-                            x1 = 60f * scale, y1 = 21f * scale,
-                            x2 = 60f * scale, y2 = 16f * scale,
-                            x3 = 60f * scale, y3 = 17f * scale
+                            -20f, 5f, -20f, 15f, -10f, 15f
                         )
 
-                        // Continue the cubic bezier: 60 17 60 16 59 16
+                        //C 5 15 5 15 5 35
                         cubicTo(
-                            x1 = 60f * scale, y1 = 17f * scale,
-                            x2 = 60f * scale, y2 = 16f * scale,
-                            x3 = 59f * scale, y3 = 16f * scale
+                            5f, 15f, 5f, 15f, 5f, 35f
                         )
 
-                        // H58 - Horizontal line to x=58 (equivalent to lineTo(58, 16))
-                        lineTo(58f * scale, 16f * scale)
+                        //L 5 35
+                        lineTo(5f, 35f)
 
-                        // S57 16 57 15 - Smooth cubic curve to (57, 15)
-                        // S creates a smooth cubic bezier where first control point is reflection of previous
-                        // Since previous curve ended at (59,16) with control point (60,16),
-                        // the reflected control point would be (58,16)
+                        //C 5 49 5 65 13 81
                         cubicTo(
-                            x1 = 58f * scale, y1 = 16f * scale,  // Reflected control point
-                            x2 = 57f * scale, y2 = 16f * scale,  // Second control point
-                            x3 = 57f * scale, y3 = 15f * scale   // End point
+                            5f, 49f, 5f, 65f, 13f, 81f
                         )
+//eyes
+                        //M -42 -15
+                        moveTo(-42f, -15f)
 
-                        // C57 11 59 7 60 5 - Final cubic bezier curve to (60, 5)
-                        cubicTo(
-                            x1 = 57f * scale, y1 = 11f * scale,
-                            x2 = 59f * scale, y2 = 7f * scale,
-                            x3 = 60f * scale, y3 = 5f * scale
-                        )
+                        //L -42 -33
+                        lineTo(-42f, -28f)
 
-                        // Translate path to center (adjust these values based on your actual bounds)
-                        translate(
-                            Offset(
-                                centerX - (59f * scale),     // Approximate center X of your path
-                                centerY - (14.5f * scale)    // Approximate center Y of your path
-                            )
+                        //M 12 -15
+                        moveTo(20f, -15f)
+
+                        //L 12 -33
+                        lineTo(20f, -28f)
+//smile
+                        //M -40 48
+                        moveTo(-50f, 40f)
+
+                        //Q -6 54 28 48
+                        quadraticTo(
+                            -6f, 60f, 38f, 40f
                         )
                     }
 
                     drawPath(
                         path = path,
-                        color = Color(0xFF07223A),
+                        color = getFinderColors.pathColor,
                         style = Stroke(
-                            width = 5.dp.toPx(),
+                            width = 12f,
                             cap = StrokeCap.Round,
                             join = StrokeJoin.Round
                         )
                     )
+
+                    drawContext.canvas.restore()
                 }
             }
-            .drawWithContent {
-                drawContent()
-
-                // Draw circular blue gradient background
-                val centerX = size.width / 2.2f
-                val centerY = size.height / 2f
-                val radius = minOf(size.width, size.height) * 0.2f // Smaller radius for the effect
-
-                drawCircle(
-                    brush = Brush.radialGradient(
-                        colors = listOf(
-                            Color(0xFF6B9FFF).copy(alpha = 0.6f), // Light blue center
-                            Color(0xFF4A7BFF).copy(alpha = 0.4f), // Medium blue
-                            Color(0xFF4A7BFF).copy(alpha = 0.1f), // Medium blue
-                            Color.Transparent // Transparent edges
-                        ),
-                        center = Offset(centerX, centerY),
-                        radius = radius
-                    ),
-                    radius = radius,
-                    center = Offset(centerX, centerY)
-                )
-            },
-        contentAlignment = Alignment.Center
-    ) {
-
-    }
+    )
 }
+
+data class FinderColors(
+    val pathColor: Color, val gradientColor: Color
+)
+
+val LightFinderColors = FinderColors(
+    pathColor = PathLight, gradientColor = GradientLight
+)
+
+val DarkFinderColors = FinderColors(
+    pathColor = PathDark, gradientColor = GradientDark
+)
