@@ -22,7 +22,6 @@ import com.example.portfolio.core.designsystem.theme.PathLight
 fun GradientIcon(
     showAnimation: Boolean = false
 ) {
-
     val getFinderColors: FinderColors =
         if (isSystemInDarkTheme()) DarkFinderColors else LightFinderColors
 
@@ -34,13 +33,13 @@ fun GradientIcon(
                     val gradientCenterX = size.width / 2.2f
                     val gradientCenterY = size.height / 2f
                     val radius =
-                        minOf(size.width, size.height) * 0.2f // Smaller radius for the effect
+                        minOf(size.width, size.height) * 0.2f
 
                     drawCircle(
                         brush = Brush.radialGradient(
                             colors = listOf(
                                 getFinderColors.gradientColor.copy(alpha = 0.6f),
-                                Color.Transparent // Transparent edges
+                                Color.Transparent
                             ), center = Offset(gradientCenterX, gradientCenterY), radius = radius
                         )
                     )

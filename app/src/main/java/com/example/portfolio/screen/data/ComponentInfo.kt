@@ -11,18 +11,18 @@ object ComponentInfo {
 
     val titles = listOf(
         "Minimal Card Design",
-        "Coming Soon",
+        "The Finder Icon",
         "Coming Soon"
     )
 
     val descriptions = listOf(
         "A minimal card design with path animation.",
-        "Coming Soon",
+        "Finder icon draw with path",
         "Coming Soon"
     )
     val time = listOf(
         "27.8.25",
-        "soon",
+        "6.9.25",
         "soon"
     )
 
