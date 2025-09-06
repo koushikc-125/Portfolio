@@ -8,19 +8,28 @@
 
  ## **Layout**
 
-<div>
-  <img height="600" src="app/src/main/res/drawable/home_screen_demo.png" alt="demo_home_screen">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img height="600" src="app/src/main/res/drawable/detail_screen_demo.png" alt="demo_detail_screen">
-</div>
+<table>
+  <tr>
+    <td style="padding: 10px;">
+      <img height="600" src="app/src/main/res/drawable/home_screen_demo.png" alt="demo_home_screen">
+    </td>
+    <td style="padding: 10px;">
+      <img height="600" src="app/src/main/res/drawable/detail_screen_demo.png" alt="demo_detail_screen">
+    </td>
+  </tr>
+</table>
 
 
 
 ## **Card Path Design** 
 <div>
-  <div>
-    <img height="600" src="app/src/main/res/drawable/card_path_animation.png" alt="card_path_animation">
-  </div>
+  <table>
+  <tr>
+    <td style="padding: 10px;">
+      <img height="600" src="app/src/main/res/drawable/home_screen_demo.png" alt="demo_home_screen">
+    </td>
+      </tr>
+</table>
     <p>
     🔗 
       <a href="https://github.com/koushikc-125/Portfolio/blob/main/app/src/main/java/com/example/portfolio/components/CardDesign.kt">Visit</a>
@@ -33,9 +42,13 @@
 ## **The Finder Icon**
 
 <div>
-  <div>
+  <table>
+  <tr>
+    <td style="padding: 10px;">
     <img height="600" src="app/src/main/res/drawable/finder_icon.png" alt="finder_icon">
-  </div>
+      </td>
+      </tr>
+</table>
   <p>
     🔗 
     <a href="https://github.com/koushikc-125/Portfolio/blob/main/app/src/main/java/com/example/portfolio/components/GradientWithIcon.kt">
