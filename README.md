@@ -20,13 +20,12 @@
 </table>
 
 
-
 ## **Card Path Design** 
 <div>
   <table>
   <tr>
     <td style="padding: 10px;">
-      <img height="600" src="app/src/main/res/drawable/home_screen_demo.png" alt="demo_home_screen">
+      <img height="600" src="app/src/main/res/drawable/card_path_animation.png" alt="demo_home_screen">
     </td>
       </tr>
 </table>
