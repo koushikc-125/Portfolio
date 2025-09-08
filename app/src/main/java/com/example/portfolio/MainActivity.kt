@@ -63,7 +63,7 @@ fun PortfolioApp() {
                         key = key,
                     ) {
                         HomeScreen(
-                            onClick = { componentInfo ->
+                            onItemClick = { componentInfo ->
                                 backStack.add(Detail(componentInfo.id))
                             }
                         )

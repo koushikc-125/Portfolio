@@ -1,15 +1,18 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.portfolio.screen.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -23,39 +26,26 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.PreviewFontScale
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.portfolio.core.designsystem.component.Container
 import com.example.portfolio.core.designsystem.component.SimpleButton
-import com.example.portfolio.core.designsystem.component.SimpleElevatedCard
-import com.example.portfolio.core.designsystem.component.SimpleLinkButton
-import com.example.portfolio.core.designsystem.component.SubHeading
 import com.example.portfolio.core.designsystem.component.ThemePreview
-import com.example.portfolio.core.designsystem.icon.ApplicationIcons
 import com.example.portfolio.core.designsystem.theme.PortfolioTheme
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
-import com.example.portfolio.core.util.getComponentInfoById
 import com.example.portfolio.screen.data.ComponentData
-import com.example.portfolio.screen.data.detailScreenContentData
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(
-    currentComponentInfoId: Int,
-    onBack: () -> Unit
+fun MoreScreen(
+    onItemClick: (ComponentData) -> Unit,
+    onBack: () -> Unit,
 ) {
     val horizontalPadding = 24.dp
-    val topHorizontalPadding = 12.dp
-    val topPadding = 48.dp
-    val currentComponentInfo = getComponentInfoById(currentComponentInfoId)
-    val previousComponentInfoId = null
-    val nextComponentInfoId = null
+    val bottomPadding = 28.dp
     val backgroundColor = MaterialTheme.colorScheme.surface
+    val state = rememberLazyListState()
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
         contentColor = MaterialTheme.colorScheme.onSurface,
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
@@ -69,14 +59,8 @@ fun DetailScreen(
                     ),
                     modifier = Modifier
                         .width(712.dp),
-                    windowInsets = WindowInsets(top = 50.dp),
-                    navigationIcon = { SimpleButton(onBack = onBack) },
                     title = {},
-                    actions = {
-                        SimpleLinkButton(
-                            resourceIcon = ApplicationIcons.Link
-                        )
-                    },
+                    navigationIcon = { SimpleButton(onBack = onBack) }
                 )
             }
         }
@@ -108,9 +92,12 @@ fun DetailScreen(
         }
 
         LazyColumn(
+            state = state,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = horizontalPadding),
+                .padding(horizontal = horizontalPadding)
+            //    .windowInsetsPadding(WindowInsets.statusBars)
+            ,
             contentPadding = PaddingValues(
                 top = paddingValues.calculateTopPadding(),
                 bottom = paddingValues.calculateBottomPadding()
@@ -120,49 +107,22 @@ fun DetailScreen(
         ) {
             item {
                 Container(
-                    deviceConfiguration
+                    deviceConfiguration = deviceConfiguration,
                 ) {
-                    DetailScreenContent(currentComponentInfo)
+
                 }
             }
         }
     }
 }
 
-@Composable
-fun DetailScreenContent(componentData: ComponentData) {
-    SubHeading(
-        text = componentData.title,
-        style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.colorScheme.onPrimary,
-        bottomPadding = 12.dp
-    )
-    SubHeading(
-        text = componentData.description,
-        bottomPadding = 0.dp
-    )
-    SimpleElevatedCard(
-        onClick = {},
-        modifier = Modifier
-            .padding(vertical = 32.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            detailScreenContentData[componentData.id]()
-        }
-    }
-}
-
 @ThemePreview
 @Composable
-private fun DetailScreenPreview() {
+private fun MoreScreenPreview() {
     PortfolioTheme {
-        DetailScreen(
-            currentComponentInfoId = 1,
-            onBack = {},
+        MoreScreen(
+            onItemClick = {},
+            onBack = {}
         )
     }
 }

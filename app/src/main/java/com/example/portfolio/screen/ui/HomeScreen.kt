@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -42,7 +41,7 @@ import com.example.portfolio.screen.data.ComponentData
 
 @Composable
 fun HomeScreen(
-    onClick: (ComponentData) -> Unit = {}
+    onItemClick: (ComponentData) -> Unit = {}
 ) {
     val options = listOf("X", "Mail", "GitHub")
     val optionsLink =
@@ -62,7 +61,8 @@ fun HomeScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .zIndex(1f), contentAlignment = Alignment.TopCenter
+                .zIndex(1f),
+            contentAlignment = Alignment.TopCenter
         ) {
             Box(
                 modifier = Modifier
@@ -100,7 +100,7 @@ fun HomeScreen(
                     deviceConfiguration = deviceConfiguration,
                 ) {
                     HomeScreenContent(
-                        onClick = onClick,
+                        onClick = onItemClick,
                         options = options,
                         optionsLink = optionsLink,
                         bottomPadding = bottomPadding,

@@ -11,17 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.portfolio.core.designsystem.component.SubHeading
+import com.example.portfolio.core.designsystem.component.SubHeadingWithIcon
+import com.example.portfolio.core.designsystem.icon.ApplicationIcons
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
-import com.example.portfolio.screen.data.ComponentInfo.componentsInfo
 import com.example.portfolio.screen.data.ComponentData
-import kotlin.collections.chunked
+import com.example.portfolio.screen.data.ComponentInfo.componentsInfo
 
 @Composable
 fun ComponentsGrid(
     deviceConfiguration: DeviceConfiguration = DeviceConfiguration.Horizontal,
-    onClick: (ComponentData) -> Unit
+    onClick: (ComponentData) -> Unit,
 ) {
-    val itemNumber = when(deviceConfiguration) {
+    val itemNumber = when (deviceConfiguration) {
         DeviceConfiguration.Vertical -> 1
         else -> 2
     }
@@ -33,8 +34,10 @@ fun ComponentsGrid(
             .padding(top = topPadding),
     ) {
         Column {
-            SubHeading(
+            SubHeadingWithIcon(
                 text = "Works",
+                icon = ApplicationIcons.Forward,
+                onIconClick = {},
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onPrimary,
                 bottomPadding = 24.dp
