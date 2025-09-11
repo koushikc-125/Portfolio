@@ -127,7 +127,7 @@ fun DetailScreenContent(componentData: ComponentData) {
 private fun DetailScreenPreview() {
     PortfolioTheme {
         DetailScreen(
-            currentComponentInfoId = 1,
+            currentComponentInfoId = 0,
             onBack = {},
         )
     }
