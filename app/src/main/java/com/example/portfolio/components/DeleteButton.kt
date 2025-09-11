@@ -6,6 +6,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -30,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
@@ -48,16 +51,16 @@ fun DeleteButton(
         SimpleButton(showAnimation)
     }
 }
-
+//    borderWidth: Dp = (0.5).dp,
+//    borderColor: Color = MaterialTheme.colorScheme.outline,
 private @Composable
 fun SimpleButton(
     showAnimation: Boolean,
 ) {
     var isPressed by remember { mutableStateOf(false) }
-    var openAlertDialog by remember { mutableStateOf(false) }
 
-    val animatedScale by animateFloatAsState(
-        if (isPressed) .84f else 1f,
+    val scaleAnimation by animateFloatAsState(
+        if (isPressed) .98f else 1f,
         tween(
             durationMillis = 300,
             easing = FastOutSlowInEasing
@@ -65,7 +68,7 @@ fun SimpleButton(
         label = "AnimatedScaleF"
     )
 
-    val animatedWidth by animateFloatAsState(
+    val widthAnimation by animateFloatAsState(
         if (isPressed) 1f else 0f,
         tween(
             durationMillis = 800,
@@ -74,31 +77,15 @@ fun SimpleButton(
         label = "AnimatedWidth"
     )
 
-    LaunchedEffect(animatedWidth) {
-        if (animatedWidth >= 0.99) {
-            openAlertDialog = true
-        }
-    }
-
-    AnimatedVisibility(openAlertDialog) {
-        AlertDialogExample(
-            onDismissRequest = { openAlertDialog = false },
-            onConfirmation = {
-                openAlertDialog = false
-                println("Confirmation registered") // Add logic here to handle confirmation.
-            },
-            dialogTitle = "Alert dialog example",
-            dialogText = "This is an example of an alert dialog with buttons.",
-            icon = Icons.Default.Info
-        )
-    }
-
     Box(
         Modifier
             .fillMaxWidth(.8f)
             .fillMaxHeight(.2f)
+            .scale(scaleAnimation)
+            .shadow(1.dp,RoundedCornerShape(24.dp))
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.primary)
+            .border(.5.dp, MaterialTheme.colorScheme.outline.copy(.8f),RoundedCornerShape(24.dp))
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
@@ -119,11 +106,11 @@ fun SimpleButton(
             "Hold to Delete",
             style = MaterialTheme.typography.labelMedium,
             modifier = Modifier
-                .scale(animatedScale)
+                .scale(scaleAnimation)
         )
         Box(
             Modifier
-                .fillMaxWidth(animatedWidth)
+                .fillMaxWidth(widthAnimation)
                 .fillMaxHeight()
                 .align(Alignment.CenterStart)
                 .background(MaterialTheme.colorScheme.surfaceContainer)
@@ -139,9 +126,9 @@ fun SimpleButton(
                 .drawWithContent {
                     drawContent()
                 }
-                .scale(animatedScale)
+                .scale(scaleAnimation)
                 .drawWithContent {
-                    val overlayWidth = size.width * animatedWidth
+                    val overlayWidth = size.width * widthAnimation
                     clipRect(right = overlayWidth) {
                         this@drawWithContent.drawContent()
                     }
@@ -149,46 +136,4 @@ fun SimpleButton(
             textAlign = TextAlign.Center,
         )
     }
-}
-
-@Composable
-fun AlertDialogExample(
-    onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
-    dialogTitle: String,
-    dialogText: String,
-    icon: ImageVector,
-) {
-    AlertDialog(
-        icon = {
-            Icon(icon, contentDescription = "Example Icon")
-        },
-        title = {
-            Text(text = dialogTitle)
-        },
-        text = {
-            Text(text = dialogText)
-        },
-        onDismissRequest = {
-            onDismissRequest()
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirmation()
-                }
-            ) {
-                Text("Confirm")
-            }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = {
-                    onDismissRequest()
-                }
-            ) {
-                Text("Dismiss")
-            }
-        }
-    )
 }
