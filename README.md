@@ -68,7 +68,7 @@
 </table>
     <p>
     🔗 
-      <a href="https://github.com/koushikc-125/Portfolio/blob/main/app/src/main/java/com/example/portfolio/components/Squish Button.kt">Visit</a>
+      <a href="https://github.com/koushikc-125/Portfolio/blob/main/app/src/main/java/com/example/portfolio/components/SquishButton.kt">Visit</a>
   </p>
   
 </div>
