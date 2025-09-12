@@ -10,7 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.portfolio.core.designsystem.component.SubHeading
 import com.example.portfolio.core.designsystem.component.SubHeadingWithIcon
 import com.example.portfolio.core.designsystem.icon.ApplicationIcons
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
@@ -21,12 +20,16 @@ import com.example.portfolio.screen.data.ComponentInfo.componentsInfo
 fun ComponentsGrid(
     deviceConfiguration: DeviceConfiguration = DeviceConfiguration.Horizontal,
     onClick: (ComponentData) -> Unit,
+    onMoreButtonClick: () -> Unit,
 ) {
+    val firstTwoItems = componentsInfo.take(3)
+
     val itemNumber = when (deviceConfiguration) {
         DeviceConfiguration.Vertical -> 1
         else -> 2
     }
-    val chunkedItems = componentsInfo.chunked(itemNumber)
+    
+    val chunkedItems = firstTwoItems.chunked(itemNumber)
     val topPadding = 84.dp
 
     Box(
@@ -37,7 +40,7 @@ fun ComponentsGrid(
             SubHeadingWithIcon(
                 text = "Works",
                 icon = ApplicationIcons.Forward,
-                onIconClick = {},
+                onIconClick = { onMoreButtonClick() },
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onPrimary,
                 bottomPadding = 24.dp

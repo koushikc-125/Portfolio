@@ -2,15 +2,16 @@
 
 package com.example.portfolio.screen.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,6 +34,7 @@ import com.example.portfolio.core.designsystem.component.SimpleButton
 import com.example.portfolio.core.designsystem.component.ThemePreview
 import com.example.portfolio.core.designsystem.theme.PortfolioTheme
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
+import com.example.portfolio.core.ui.MoreComponentsGrid
 import com.example.portfolio.screen.data.ComponentData
 
 @Composable
@@ -57,6 +59,7 @@ fun MoreScreen(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = Color.Transparent
                     ),
+                    windowInsets = WindowInsets(top = 50.dp),
                     modifier = Modifier
                         .width(712.dp),
                     title = {},
@@ -107,9 +110,11 @@ fun MoreScreen(
         ) {
             item {
                 Container(
-                    deviceConfiguration = deviceConfiguration,
+                    deviceConfiguration
                 ) {
-
+                    MoreComponentsGrid(
+                        onClick = onItemClick
+                    )
                 }
             }
         }

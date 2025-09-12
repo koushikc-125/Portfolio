@@ -41,7 +41,8 @@ import com.example.portfolio.screen.data.ComponentData
 
 @Composable
 fun HomeScreen(
-    onItemClick: (ComponentData) -> Unit = {}
+    onItemClick: (ComponentData) -> Unit = {},
+    onMoreButtonClick: () -> Unit
 ) {
     val options = listOf("X", "Mail", "GitHub")
     val optionsLink =
@@ -100,6 +101,7 @@ fun HomeScreen(
                     deviceConfiguration = deviceConfiguration,
                 ) {
                     HomeScreenContent(
+                        onMoreButtonClick = onMoreButtonClick,
                         onClick = onItemClick,
                         options = options,
                         optionsLink = optionsLink,
@@ -114,11 +116,12 @@ fun HomeScreen(
 
 @Composable
 fun HomeScreenContent(
+    onMoreButtonClick: () -> Unit,
     onClick: (ComponentData) -> Unit,
     options: List<String>,
     optionsLink: List<String>,
     bottomPadding: Dp,
-    deviceConfiguration: DeviceConfiguration
+    deviceConfiguration: DeviceConfiguration,
 ) {
     Heading(
         text = UiText.StringResourceId(R.string.heading).asString(),
@@ -140,7 +143,7 @@ fun HomeScreenContent(
         )
     }
     ComponentsGrid(
-        deviceConfiguration = deviceConfiguration, onClick = onClick
+        deviceConfiguration = deviceConfiguration, onClick = onClick,onMoreButtonClick
     )
     Spacer(modifier = Modifier.height(bottomPadding))
 }
@@ -149,7 +152,7 @@ fun HomeScreenContent(
 @Composable
 private fun HomeScreenPreview() {
     PortfolioTheme {
-        HomeScreen({})
+        HomeScreen({},{})
     }
 }
 

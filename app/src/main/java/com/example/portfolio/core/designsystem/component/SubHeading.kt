@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -80,12 +81,6 @@ fun SubHeadingWithIcon(
     bottomPadding: Dp = 24.dp,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    var resizedTestStyle by remember {
-        mutableStateOf(style)
-    }
-    var shouldDraw by remember {
-        mutableStateOf(false)
-    }
 
     Box(
         modifier = Modifier
@@ -99,23 +94,8 @@ fun SubHeadingWithIcon(
         ) {
             Text(
                 text,
-                modifier = Modifier.drawWithContent {
-                    if (shouldDraw) {
-                        drawContent()
-                    }
-                },
                 style = style,
-                color = color,
-                softWrap = true,
-                onTextLayout = { result ->
-                    if (result.didOverflowHeight) {
-                        resizedTestStyle = resizedTestStyle.copy(
-                            fontSize = resizedTestStyle.fontSize * 0.95
-                        )
-                    } else {
-                        shouldDraw = true
-                    }
-                }
+                color = color
             )
             if (icon != null) {
 
