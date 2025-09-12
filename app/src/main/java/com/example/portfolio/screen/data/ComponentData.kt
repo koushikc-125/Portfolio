@@ -8,5 +8,6 @@ data class ComponentData(
     val title: String,
     val description: String,
     val time: String,
+    val isFullWidth: Boolean = false,
     val content: @Composable () -> Unit
 )

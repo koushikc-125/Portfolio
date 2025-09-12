@@ -1,7 +1,5 @@
 package com.example.portfolio.screen.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import com.example.portfolio.components.CardDesign
 import com.example.portfolio.components.GradientIcon
@@ -31,12 +29,20 @@ object ComponentInfo {
         { GradientIcon() },
         { Soon() }
     )
+
+    val isFullWidth = listOf(
+        true,
+        false,
+        false,
+    )
+
     val componentsInfo = titles.mapIndexed { idx, title ->
         ComponentData(
             id = idx,
             title = title,
             description = descriptions[idx],
             time = time[idx],
+            isFullWidth = isFullWidth[idx],
             content = content[idx]
         )
     }
