@@ -38,6 +38,11 @@ object ComponentInfo {
         "$gitUrl/components/GradientWithIcon.kt",
         "$gitUrl/core/util/Soon.kt",
     )
+    val isFullWidth = listOf(
+        true,
+        false,
+        false,
+    )
 
     val componentsInfo = titles.mapIndexed { idx, title ->
         ComponentData(
@@ -46,6 +51,7 @@ object ComponentInfo {
             description = descriptions[idx],
             time = time[idx],
             gitLinks = gitLinks[idx],
+            isFullWidth = isFullWidth[idx],
             content = content[idx]
         )
     }

@@ -22,6 +22,7 @@ import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.example.portfolio.core.designsystem.theme.PortfolioTheme
 import com.example.portfolio.screen.ui.DetailScreen
 import com.example.portfolio.screen.ui.HomeScreen
+import com.example.portfolio.screen.ui.MoreScreen
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
@@ -38,6 +39,9 @@ class MainActivity : ComponentActivity() {
 
 @Serializable
 data object HomeScreenList : NavKey
+
+@Serializable
+data object MoreScreen : NavKey
 
 @Serializable
 data class Detail(val id: Int) : NavKey
@@ -63,8 +67,28 @@ fun PortfolioApp() {
                         key = key,
                     ) {
                         HomeScreen(
-                            onClick = { componentInfo ->
+                            onItemClick = { componentInfo ->
                                 backStack.add(Detail(componentInfo.id))
+                            },
+                            onMoreButtonClick = {
+                                backStack.add(MoreScreen)
+                            }
+                        )
+                    }
+                }
+
+                is MoreScreen -> {
+                    NavEntry(
+                        key = key,
+                    ) {
+                        MoreScreen(
+                            onItemClick = { componentInfo ->
+                                backStack.add(Detail(componentInfo.id))
+                            },
+                            onBack = {
+                                if (backStack.isNotEmpty()) {
+                                    backStack.removeLastOrNull()
+                                }
                             }
                         )
                     }

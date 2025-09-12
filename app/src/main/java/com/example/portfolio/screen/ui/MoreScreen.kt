@@ -1,54 +1,46 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.portfolio.screen.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.dropShadow
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.example.portfolio.R
 import com.example.portfolio.core.designsystem.component.Container
-import com.example.portfolio.core.designsystem.component.Heading
-import com.example.portfolio.core.designsystem.component.SimpleButtonGroup
-import com.example.portfolio.core.designsystem.component.SubHeading
+import com.example.portfolio.core.designsystem.component.SimpleButton
 import com.example.portfolio.core.designsystem.component.ThemePreview
 import com.example.portfolio.core.designsystem.theme.PortfolioTheme
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
-import com.example.portfolio.core.ui.ComponentsGrid
-import com.example.portfolio.core.util.UiText
+import com.example.portfolio.core.ui.MoreComponentsGrid
 import com.example.portfolio.screen.data.ComponentData
 
 @Composable
-fun HomeScreen(
-    onItemClick: (ComponentData) -> Unit = {},
-    onMoreButtonClick: () -> Unit
+fun MoreScreen(
+    onItemClick: (ComponentData) -> Unit,
+    onBack: () -> Unit,
 ) {
-    val options = listOf("X", "Mail", "GitHub")
-    val optionsLink =
-        listOf("x.com/koushikc125", "koushikc513@gmail.com", "github.com/koushikc-125")
     val horizontalPadding = 24.dp
     val bottomPadding = 28.dp
     val backgroundColor = MaterialTheme.colorScheme.surface
@@ -57,6 +49,23 @@ fun HomeScreen(
     Scaffold(
         contentColor = MaterialTheme.colorScheme.onSurface,
         containerColor = MaterialTheme.colorScheme.surface,
+        topBar = {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color.Transparent
+                    ),
+                    windowInsets = WindowInsets(top = 50.dp),
+                    modifier = Modifier
+                        .width(712.dp),
+                    title = {},
+                    navigationIcon = { SimpleButton(onClick = onBack) }
+                )
+            }
+        }
     ) { paddingValues ->
         val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
         val deviceConfiguration = DeviceConfiguration.fromWindowSizeClass(windowSizeClass)
@@ -71,18 +80,16 @@ fun HomeScreen(
                 modifier = Modifier
                     .width(692.dp)
                     .fillMaxHeight(.08f)
-                    //.background(Color.Red)
-                    .dropShadow(
-                        shape = RectangleShape,
-                        block = {
-                            offset = Offset(0f, -20f)
-                            radius = 1f
+//                    .background(Color.Red)
+                    .drawWithContent {
+                        drawContent()
+                        drawRect(
                             brush = Brush.verticalGradient(
                                 colors = listOf(backgroundColor, Color.Transparent)
-                            )
-                            blendMode = BlendMode.SrcOver
-                        }
-                    )
+                            ),
+                            blendMode = BlendMode.SrcOver,
+                        )
+                    }
             )
         }
 
@@ -102,15 +109,10 @@ fun HomeScreen(
         ) {
             item {
                 Container(
-                    deviceConfiguration = deviceConfiguration,
+                    deviceConfiguration
                 ) {
-                    HomeScreenContent(
-                        onMoreButtonClick = onMoreButtonClick,
-                        onClick = onItemClick,
-                        options = options,
-                        optionsLink = optionsLink,
-                        bottomPadding = bottomPadding,
-                        deviceConfiguration = deviceConfiguration,
+                    MoreComponentsGrid(
+                        onClick = onItemClick
                     )
                 }
             }
@@ -118,45 +120,13 @@ fun HomeScreen(
     }
 }
 
-@Composable
-fun HomeScreenContent(
-    onMoreButtonClick: () -> Unit,
-    onClick: (ComponentData) -> Unit,
-    options: List<String>,
-    optionsLink: List<String>,
-    bottomPadding: Dp,
-    deviceConfiguration: DeviceConfiguration,
-) {
-    Heading(
-        text = UiText.StringResourceId(R.string.heading).asString(),
-        deviceConfiguration = deviceConfiguration
-    )
-    SubHeading(
-        text = UiText.StringResourceId(R.string.subheading_1).asString(),
-        bottomPadding = 28.dp
-    )
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        SimpleButtonGroup(
-            options = options,
-            optionLink = optionsLink,
-            modifier = Modifier.graphicsLayer(rotationZ = -50f)
-        )
-    }
-    ComponentsGrid(
-        deviceConfiguration = deviceConfiguration, onClick = onClick,onMoreButtonClick
-    )
-    Spacer(modifier = Modifier.height(bottomPadding))
-}
-
 @ThemePreview
 @Composable
-private fun HomeScreenPreview() {
+private fun MoreScreenPreview() {
     PortfolioTheme {
-        HomeScreen({},{})
+        MoreScreen(
+            onItemClick = {},
+            onBack = {}
+        )
     }
 }
-

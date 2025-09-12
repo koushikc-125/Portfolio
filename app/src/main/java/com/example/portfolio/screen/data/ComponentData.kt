@@ -9,5 +9,6 @@ data class ComponentData(
     val description: String,
     val time: String,
     val gitLinks: String,
+    val isFullWidth: Boolean,
     val content: @Composable () -> Unit
 )

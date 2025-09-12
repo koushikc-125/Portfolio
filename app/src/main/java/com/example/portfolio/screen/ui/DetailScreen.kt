@@ -14,10 +14,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
@@ -37,7 +39,7 @@ import com.example.portfolio.screen.data.detailScreenContentData
 @Composable
 fun DetailScreen(
     currentComponentInfoId: Int,
-    onBack: () -> Unit,
+    onBack: () -> Unit
 ) {
     val horizontalPadding = 24.dp
     val topHorizontalPadding = 12.dp
@@ -46,6 +48,7 @@ fun DetailScreen(
     val previousComponentInfoId = null
     val nextComponentInfoId = null
     val context = LocalContext.current
+    val backgroundColor = MaterialTheme.colorScheme.surface
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -57,6 +60,9 @@ fun DetailScreen(
                 contentAlignment = Alignment.Center
             ) {
                 TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color.Transparent
+                    ),
                     modifier = Modifier
                         .width(712.dp),
                     windowInsets = WindowInsets(top = 50.dp),
@@ -65,7 +71,8 @@ fun DetailScreen(
                     actions = {
                         SimpleButton(
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW,
+                                val intent = Intent(
+                                    Intent.ACTION_VIEW,
                                     "https://${currentComponentInfo.gitLinks}".toUri()
                                 )
                                 context.startActivity(intent)
