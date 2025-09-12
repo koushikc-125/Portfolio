@@ -2,11 +2,12 @@ package com.example.portfolio.screen.data
 
 import androidx.compose.runtime.Composable
 import com.example.portfolio.components.CardDesign
+import com.example.portfolio.components.SquishButton
 import com.example.portfolio.components.GradientIcon
 import com.example.portfolio.core.util.Soon
 
 val detailScreenContentData: List<@Composable () -> Unit> = listOf(
-    { CardDesign(showAnimation = true) },
+    { SquishButton(showAnimation = true) },
     { GradientIcon() },
-    { Soon() }
+    { CardDesign(showAnimation = true) },
 )

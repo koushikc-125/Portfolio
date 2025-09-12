@@ -2,6 +2,7 @@ package com.example.portfolio.core.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,7 +31,7 @@ fun SimpleCard(
     title: String? = null,
     time: String? = null,
     style: TextStyle = MaterialTheme.typography.labelMedium,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     SimpleElevatedCard(
         onClick = { onClick() }
@@ -42,6 +43,7 @@ fun SimpleCard(
         ) {
             Box(
                 modifier = Modifier
+                    .clickable{ onClick() }
                     .weight(1f)
                     .fillMaxWidth()
                     .background(

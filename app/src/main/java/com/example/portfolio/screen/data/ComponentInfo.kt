@@ -1,9 +1,8 @@
 package com.example.portfolio.screen.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import com.example.portfolio.components.CardDesign
+import com.example.portfolio.components.SquishButton
 import com.example.portfolio.components.GradientIcon
 import com.example.portfolio.core.util.Soon
 import com.example.portfolio.core.util.gitUrl
@@ -11,37 +10,37 @@ import com.example.portfolio.core.util.gitUrl
 object ComponentInfo {
 
     val titles = listOf(
-        "Minimal Card Design",
+        "Squish Button",
         "The Finder Icon",
-        "Coming Soon"
+        "Minimal Card Design",
     )
 
     val descriptions = listOf(
-        "A minimal card design with path animation.",
+        "A interactive button that compresses upon user press, featuring a progressive overlay animation that responds dynamically to pressure, creating a visually engaging masking effect.",
         "Finder icon draw with path",
-        "Coming Soon"
+        "A minimal card design with path animation.",
     )
     val time = listOf(
-        "27.8.25",
+        "13.9.25",
         "6.9.25",
-        "soon"
+        "27.8.25",
     )
 
     val content: List<@Composable () -> Unit> = listOf(
-        { CardDesign() },
+        { SquishButton() },
         { GradientIcon() },
-        { Soon() }
+        { CardDesign() },
     )
 
     val gitLinks = listOf(
-        "$gitUrl/components/CardDesign.kt",
+        "$gitUrl/components/SquishButton.kt",
         "$gitUrl/components/GradientWithIcon.kt",
-        "$gitUrl/core/util/Soon.kt",
+        "$gitUrl/components/CardDesign.kt",
     )
     val isFullWidth = listOf(
+        false,
+        false,
         true,
-        false,
-        false,
     )
 
     val componentsInfo = titles.mapIndexed { idx, title ->
