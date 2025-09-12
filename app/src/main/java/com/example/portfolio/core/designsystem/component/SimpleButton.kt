@@ -36,12 +36,12 @@ import com.example.portfolio.core.designsystem.icon.ApplicationIcons
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SimpleButton(
-    onBack: () -> Unit,
+    onClick: () -> Unit,
     icon: ImageVector = ApplicationIcons.Back,
     resourceIcon: Int? = null
 ) {
     FilledTonalIconButton(
-        onClick = onBack,
+        onClick = onClick,
         colors = IconButtonColors(
             containerColor = MaterialTheme.colorScheme.secondary,
             disabledContainerColor = Color.Red,

@@ -1,5 +1,6 @@
 package com.example.portfolio.screen.ui
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,13 +18,12 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewFontScale
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import com.example.portfolio.core.designsystem.component.Container
 import com.example.portfolio.core.designsystem.component.SimpleButton
 import com.example.portfolio.core.designsystem.component.SimpleElevatedCard
-import com.example.portfolio.core.designsystem.component.SimpleLinkButton
 import com.example.portfolio.core.designsystem.component.SubHeading
 import com.example.portfolio.core.designsystem.component.ThemePreview
 import com.example.portfolio.core.designsystem.icon.ApplicationIcons
@@ -37,7 +37,7 @@ import com.example.portfolio.screen.data.detailScreenContentData
 @Composable
 fun DetailScreen(
     currentComponentInfoId: Int,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
     val horizontalPadding = 24.dp
     val topHorizontalPadding = 12.dp
@@ -45,6 +45,7 @@ fun DetailScreen(
     val currentComponentInfo = getComponentInfoById(currentComponentInfoId)
     val previousComponentInfoId = null
     val nextComponentInfoId = null
+    val context = LocalContext.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -59,12 +60,19 @@ fun DetailScreen(
                     modifier = Modifier
                         .width(712.dp),
                     windowInsets = WindowInsets(top = 50.dp),
-                    navigationIcon = { SimpleButton(onBack = onBack) },
+                    navigationIcon = { SimpleButton(onClick = onBack) },
                     title = {},
                     actions = {
-                        SimpleLinkButton(
-                            resourceIcon = ApplicationIcons.Link
-                        )
+                        SimpleButton(
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW,
+                                    "https://${currentComponentInfo.gitLinks}".toUri()
+                                )
+                                context.startActivity(intent)
+                            },
+                            resourceIcon = ApplicationIcons.Link,
+
+                            )
                     },
                 )
             }
