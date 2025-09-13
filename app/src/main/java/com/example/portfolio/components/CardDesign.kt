@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.portfolio.core.designsystem.component.ThemePreview
@@ -178,11 +179,13 @@ private fun AnimatingTextHeading(
     Text(
         text = "Real-Time Insights",
         fontSize = 14.sp,
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.onPrimary,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
         modifier = Modifier
             .alpha(if (isVisible) animateAlpha else 1f)
-            .blur(if (isVisible) animationBlur.dp else 0.dp),
-        style = MaterialTheme.typography.labelMedium,
-        color = MaterialTheme.colorScheme.onPrimary
+            .blur(if (isVisible) animationBlur.dp else 0.dp)
     )
 
 }
@@ -214,12 +217,14 @@ private fun AnimatingTextSubHeading(
     Text(
         text = "Track and continuously optimize\nperformance with real-time analytics.",
         fontSize = 12.sp,
+        style = MaterialTheme.typography.titleSmall,
+        color = color,
+        lineHeight = 14.sp,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
         modifier = Modifier
             .alpha(if (isVisible) animateAlpha else 1f)
-            .blur(if (isVisible) animationBlur.dp else 0.dp),
-        lineHeight = 14.sp,
-        style = MaterialTheme.typography.titleSmall,
-        color = color
+            .blur(if (isVisible) animationBlur.dp else 0.dp)
     )
 
 }

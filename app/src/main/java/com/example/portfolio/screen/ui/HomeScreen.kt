@@ -34,6 +34,7 @@ import com.example.portfolio.core.designsystem.component.Container
 import com.example.portfolio.core.designsystem.component.Heading
 import com.example.portfolio.core.designsystem.component.SimpleButtonGroup
 import com.example.portfolio.core.designsystem.component.SubHeading
+import com.example.portfolio.core.designsystem.component.SubTitle
 import com.example.portfolio.core.designsystem.component.ThemePreview
 import com.example.portfolio.core.designsystem.theme.PortfolioTheme
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
@@ -131,7 +132,7 @@ fun HomeScreenContent(
         text = UiText.StringResourceId(R.string.heading).asString(),
         deviceConfiguration = deviceConfiguration
     )
-    SubHeading(
+    SubTitle(
         text = UiText.StringResourceId(R.string.subheading_1).asString(),
         bottomPadding = 28.dp
     )

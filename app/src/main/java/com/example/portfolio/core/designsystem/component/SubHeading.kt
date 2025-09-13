@@ -34,12 +34,30 @@ fun SubHeading(
     bottomPadding: Dp = 24.dp,
 ) {
 
-    var resizedTestStyle by remember {
-        mutableStateOf(style)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = bottomPadding),
+        contentAlignment = contentAlignment
+    ) {
+        Text(
+            text,
+            style = style,
+            color = color,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
-    var shouldDraw by remember {
-        mutableStateOf(false)
-    }
+}
+
+@Composable
+fun DescriptionText(
+    text: String,
+    style: TextStyle = MaterialTheme.typography.bodyMedium,
+    color: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    contentAlignment: Alignment = Alignment.CenterStart,
+    bottomPadding: Dp = 24.dp,
+) {
 
     Box(
         modifier = Modifier
@@ -49,23 +67,8 @@ fun SubHeading(
     ) {
         Text(
             text,
-            modifier = Modifier.drawWithContent {
-                if (shouldDraw) {
-                    drawContent()
-                }
-            },
             style = style,
             color = color,
-            softWrap = true,
-            onTextLayout = { result ->
-                if (result.didOverflowHeight) {
-                    resizedTestStyle = resizedTestStyle.copy(
-                        fontSize = resizedTestStyle.fontSize * 0.95
-                    )
-                } else {
-                    shouldDraw = true
-                }
-            }
         )
     }
 }
@@ -95,7 +98,9 @@ fun SubHeadingWithIcon(
             Text(
                 text,
                 style = style,
-                color = color
+                color = color,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
             if (icon != null) {
 

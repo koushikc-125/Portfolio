@@ -8,7 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.portfolio.core.designsystem.util.DeviceConfiguration
@@ -35,6 +37,31 @@ fun Heading(
             text,
             style = style,
             softWrap = false
+        )
+    }
+}
+
+@Composable
+fun SubTitle(
+    text: String,
+    style: TextStyle = MaterialTheme.typography.bodyMedium,
+    color: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    contentAlignment: Alignment = Alignment.CenterStart,
+    bottomPadding: Dp = 24.dp,
+) {
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = bottomPadding),
+        contentAlignment = contentAlignment
+    ) {
+        Text(
+            text,
+            style = style,
+            color = color,
+            maxLines = 4,
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }

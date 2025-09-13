@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.example.portfolio.core.designsystem.component.Container
+import com.example.portfolio.core.designsystem.component.DescriptionText
 import com.example.portfolio.core.designsystem.component.SimpleButton
 import com.example.portfolio.core.designsystem.component.SimpleElevatedCard
 import com.example.portfolio.core.designsystem.component.SubHeading
@@ -118,7 +119,7 @@ fun DetailScreenContent(componentData: ComponentData) {
         color = MaterialTheme.colorScheme.onPrimary,
         bottomPadding = 12.dp
     )
-    SubHeading(
+    DescriptionText(
         text = componentData.description,
         bottomPadding = 0.dp
     )
