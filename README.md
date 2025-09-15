@@ -56,3 +56,21 @@
   </p>
   
 </div>
+
+## **Squish button** 
+<div>
+  <table>
+  <tr>
+    <td style="padding: 10px;">
+      <img height="600" src="app/src/main/res/drawable/squish_button.png" alt="squish_button">
+    </td>
+      </tr>
+</table>
+    <p>
+    🔗 
+      <a href="https://github.com/koushikc-125/Portfolio/blob/main/app/src/main/java/com/example/portfolio/components/SquishButton.kt">Visit</a>
+  </p>
+  
+</div>
+
+
