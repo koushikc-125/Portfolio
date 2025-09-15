@@ -130,9 +130,6 @@ private fun SimpleButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.Center)
-                .drawWithContent {
-                    drawContent()
-                }
                 .scale(scaleAnimation)
                 .drawWithContent {
                     val masksWidth = size.width * widthAnimation
